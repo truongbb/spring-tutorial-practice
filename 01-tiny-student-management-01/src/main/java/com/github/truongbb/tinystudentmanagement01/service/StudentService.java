@@ -1,6 +1,6 @@
-package com.example.thymeleaf01.service;
+package com.github.truongbb.tinystudentmanagement01.service;
 
-import com.example.thymeleaf01.model.Student;
+import com.github.truongbb.tinystudentmanagement01.model.Student;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

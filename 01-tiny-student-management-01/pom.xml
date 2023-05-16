@@ -11,7 +11,7 @@
     <groupId>com.github.truongbb</groupId>
     <artifactId>01-tiny-student-management-01</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>01-tiny-student-management-01</name>
+    <name>tiny-student-management-01</name>
     <description>Demo Spring boot project for student management</description>
     <properties>
         <java.version>17</java.version>

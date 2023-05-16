@@ -1,7 +1,7 @@
-package com.example.thymeleaf01.controller;
+package com.github.truongbb.tinystudentmanagement01.controller;
 
-import com.example.thymeleaf01.model.Student;
-import com.example.thymeleaf01.service.StudentService;
+import com.github.truongbb.tinystudentmanagement01.model.Student;
+import com.github.truongbb.tinystudentmanagement01.service.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

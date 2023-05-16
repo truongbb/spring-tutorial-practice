@@ -1,4 +1,4 @@
-package com.example.thymeleaf01.model;
+package com.github.truongbb.tinystudentmanagement01.model;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

@@ -1,4 +1,4 @@
-package com.example.thymeleaf01.config;
+package com.github.truongbb.tinystudentmanagement01.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
