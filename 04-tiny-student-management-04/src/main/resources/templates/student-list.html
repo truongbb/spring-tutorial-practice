@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student management</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col">
+            <a class="btn btn-primary" href="/students/create-form">Tạo mới</a>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            <table class="table table-bordered table-hover table-striped">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Address</th>
+                    <th class="text-center">Email</th>
+                    <th class="text-center">Phone</th>
+                    <th class="text-center">Date of birth</th>
+                    <th class="text-center">GPA</th>
+                    <th class="text-center">Region</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                <tr th:each="sinhVien: ${danhSachSinhVien}">
+                    <td th:text="${sinhVien.id}"/>
+                    <td th:text="${sinhVien.name}"/>
+                    <td th:text="${sinhVien.address}"/>
+                    <td th:text="${sinhVien.email}"/>
+                    <td th:text="${sinhVien.phone}"/>
+                    <td th:text="${sinhVien.dob}"/>
+                    <td th:text="${sinhVien.gpa}"/>
+                    <td th:text="${sinhVien.region.name}"/>
+                    <td class="d-flex justify-content-center">
+                        <a role="button" class="mr-3 text-primary"
+                           th:href="@{'/students/'+${sinhVien.id}+'/edit'}">
+                            <i class="fas fa-pencil-alt"></i>
+                        </a>
+                        <a role="button" class="text-danger"
+                           th:href="@{'/students/'+${sinhVien.id}+'/delete'}"
+                           th:data-confirm-delete="|Are you sure you want to delete this studentCreateModel?|"
+                           onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"
+                        >
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

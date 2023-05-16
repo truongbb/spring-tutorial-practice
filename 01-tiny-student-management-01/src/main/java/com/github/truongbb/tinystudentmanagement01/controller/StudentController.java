@@ -38,6 +38,9 @@ public class StudentController {
     }
 
     @PostMapping
+    /**
+     * @ModelAttribute trong trường hợp này các data được truyền qua parameter trên URL của request tới controller
+     */
     public String createNewStudent(@ModelAttribute("student") Student student) {
         studentService.saveStudent(student);
         return "redirect:/students";

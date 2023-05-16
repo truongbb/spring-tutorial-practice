@@ -36,6 +36,9 @@ public class StudentController {
     }
 
     @PostMapping
+    /**
+     * @ModelAttribute trong trường hợp này các data được truyền qua parameter trên URL của request tới controller
+     */
     public String createNewStudent(@ModelAttribute("sinhVienToiMuonTaoMoi") @Valid StudentModel studentModel, Errors errors) {
         if (null != errors && errors.getErrorCount() > 0) {
             return "create-student";
