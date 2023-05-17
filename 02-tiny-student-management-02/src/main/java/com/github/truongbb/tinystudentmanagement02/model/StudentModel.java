@@ -40,7 +40,7 @@ public class StudentModel {
 
     @Min(value = 0, message = "GPA cannot be less than 0")
     @Max(value = 10, message = "GPA cannot be greater than 10")
-//    @Range(min = 5, max = 10, message = "GPA must be a number between 0 and 10")
+//    @Range(min = 0, max = 10, message = "GPA must be a number between 0 and 10")
     float gpa;
 
 }

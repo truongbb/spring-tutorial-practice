@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,12 +19,30 @@ public class StudentService {
 
     ObjectMapper objectMapper;
 
-    List<Student> students;
+    List<Student> students = new ArrayList<>(); // DATABASE
 
     private static int AUTO_ID = 1;
 
-    public List<Student> getAlStudents() {
-        return students;
+    public List<StudentModel> getAlStudents() {
+        List<StudentModel> result = new ArrayList<>();
+        for (int i = 0; i < students.size(); i++) {
+            Student student = students.get(i);
+
+//            StudentModel studentModel = StudentModel.builder()
+//                    .id(student.getId())
+//                    .name(student.getName())
+//                    .address(student.getAddress())
+//                    .phone(student.getPhone())
+//                    .dob(student.getDob())
+//                    .gpa(student.getGpa())
+//                    .build();
+
+            StudentModel studentModel = objectMapper.convertValue(student, StudentModel.class);
+
+            result.add(studentModel);
+        }
+
+        return result;
     }
 
     public void saveStudent(StudentModel studentModel) {
@@ -60,6 +79,7 @@ public class StudentService {
             s.setAddress(studentModel.getAddress());
             s.setDob(studentModel.getDob());
             s.setGpa(studentModel.getGpa());
+            s.setPhone(studentModel.getPhone());
         });
     }
 

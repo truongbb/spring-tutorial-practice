@@ -1,6 +1,5 @@
 package com.github.truongbb.tinystudentmanagement02.controller;
 
-import com.github.truongbb.tinystudentmanagement02.entity.Student;
 import com.github.truongbb.tinystudentmanagement02.model.StudentModel;
 import com.github.truongbb.tinystudentmanagement02.service.StudentService;
 import lombok.AllArgsConstructor;
@@ -22,7 +21,7 @@ public class StudentController {
 
     @GetMapping
     public String getStudents(Model model) {
-        List<Student> studentModels = studentService.getAlStudents();
+        List<StudentModel> studentModels = studentService.getAlStudents();
         model.addAttribute("danhSachSinhVien", studentModels);
         return "student-list";
     }
