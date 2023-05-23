@@ -1,7 +1,7 @@
-package com.github.truongbb.tinystudentmanagement03.model;
+package com.github.truongbb.tinystudentmanagement04.model;
 
-import com.github.truongbb.tinystudentmanagement03.statics.Region;
-import com.github.truongbb.tinystudentmanagement03.validation.Under18;
+import com.github.truongbb.tinystudentmanagement04.statics.Region;
+import com.github.truongbb.tinystudentmanagement04.validation.Under18;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,4 +1,4 @@
-package com.github.truongbb.tinystudentmanagement03.config;
+package com.github.truongbb.tinystudentmanagement04.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;

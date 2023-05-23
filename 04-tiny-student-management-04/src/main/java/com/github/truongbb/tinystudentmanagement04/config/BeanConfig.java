@@ -1,4 +1,4 @@
-package com.github.truongbb.tinystudentmanagement03.config;
+package com.github.truongbb.tinystudentmanagement04.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

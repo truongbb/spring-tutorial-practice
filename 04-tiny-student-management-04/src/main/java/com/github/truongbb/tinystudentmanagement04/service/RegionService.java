@@ -1,7 +1,7 @@
-package com.github.truongbb.tinystudentmanagement03.service;
+package com.github.truongbb.tinystudentmanagement04.service;
 
-import com.github.truongbb.tinystudentmanagement03.dto.RegionDto;
-import com.github.truongbb.tinystudentmanagement03.statics.Region;
+import com.github.truongbb.tinystudentmanagement04.dto.RegionDto;
+import com.github.truongbb.tinystudentmanagement04.statics.Region;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

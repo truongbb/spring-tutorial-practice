@@ -1,4 +1,4 @@
-package com.github.truongbb.tinystudentmanagement03.validation;
+package com.github.truongbb.tinystudentmanagement04.validation;
 
 import org.springframework.util.ObjectUtils;
 

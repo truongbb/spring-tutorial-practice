@@ -1,21 +1,19 @@
-package com.github.truongbb.tinystudentmanagement03.controller;
+package com.github.truongbb.tinystudentmanagement04.controller;
 
-import com.github.truongbb.tinystudentmanagement03.dto.RegionDto;
-import com.github.truongbb.tinystudentmanagement03.model.StudentCreateModel;
-import com.github.truongbb.tinystudentmanagement03.model.StudentUpdateModel;
-import com.github.truongbb.tinystudentmanagement03.service.RegionService;
-import com.github.truongbb.tinystudentmanagement03.service.StudentService;
-import com.github.truongbb.tinystudentmanagement03.entity.Student;
+import com.github.truongbb.tinystudentmanagement04.dto.RegionDto;
+import com.github.truongbb.tinystudentmanagement04.entity.Student;
+import com.github.truongbb.tinystudentmanagement04.model.StudentCreateModel;
+import com.github.truongbb.tinystudentmanagement04.model.StudentUpdateModel;
+import com.github.truongbb.tinystudentmanagement04.service.RegionService;
+import com.github.truongbb.tinystudentmanagement04.service.StudentService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @AllArgsConstructor
@@ -30,28 +28,19 @@ public class StudentController {
     public String getStudents(Model model) {
         List<Student> studentModels = studentService.getAlStudents();
         model.addAttribute("danhSachSinhVien", studentModels);
-        return "student-list";
-    }
 
-    @GetMapping("/create-form")
-    public String forwardToCreateForm(Model model) {
-        StudentCreateModel studentCreateModel = new StudentCreateModel();
-        model.addAttribute("sinhVienMuonTaoMoi", studentCreateModel);
-        return "create-student";
+        model.addAttribute("sinhVienMuonTaoMoi", new StudentCreateModel());
+
+        return "student-list";
     }
 
     @PostMapping
     /** ==> không cần dùng @ModelAttribute khi class của attribute là model
      * @ModelAttribute trong trường hợp này các data được truyền qua parameter trên URL của request tới controller
      */
-    public String createNewStudent(@ModelAttribute("sinhVienMuonTaoMoi") @Valid StudentCreateModel sinhVienMuonTaoMoi, Errors errors) {
-//    public String createNewStudent(@Valid Student sinhVien, Errors errors) {
-        if (null != errors && errors.getErrorCount() > 0) {
-            return "create-student";
-        } else {
-            studentService.saveStudent(sinhVienMuonTaoMoi);
-            return "redirect:/students";
-        }
+    public String createNewStudent(@ModelAttribute("sinhVienMuonTaoMoi") @Valid StudentCreateModel sinhVienMuonTaoMoi) {
+        studentService.saveStudent(sinhVienMuonTaoMoi);
+        return "redirect:/students";
     }
 
     @GetMapping("/{id}/delete")

@@ -1,4 +1,4 @@
-package com.github.truongbb.tinystudentmanagement03.exceptionhandling.exception;
+package com.github.truongbb.tinystudentmanagement04.exceptionhandling.exception;
 
 public class ObjectNotFoundException extends RuntimeException {
 

@@ -1,6 +1,6 @@
-package com.github.truongbb.tinystudentmanagement03.exceptionhandling;
+package com.github.truongbb.tinystudentmanagement04.exceptionhandling;
 
-import com.github.truongbb.tinystudentmanagement03.exceptionhandling.exception.ObjectNotFoundException;
+import com.github.truongbb.tinystudentmanagement04.exceptionhandling.exception.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

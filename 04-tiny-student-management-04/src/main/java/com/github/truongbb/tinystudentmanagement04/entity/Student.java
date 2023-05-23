@@ -1,6 +1,6 @@
-package com.github.truongbb.tinystudentmanagement03.entity;
+package com.github.truongbb.tinystudentmanagement04.entity;
 
-import com.github.truongbb.tinystudentmanagement03.statics.Region;
+import com.github.truongbb.tinystudentmanagement04.statics.Region;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 

@@ -1,11 +1,11 @@
-package com.github.truongbb.tinystudentmanagement03.service;
+package com.github.truongbb.tinystudentmanagement04.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.truongbb.tinystudentmanagement03.entity.Student;
-import com.github.truongbb.tinystudentmanagement03.exceptionhandling.exception.ObjectNotFoundException;
-import com.github.truongbb.tinystudentmanagement03.model.StudentCreateModel;
-import com.github.truongbb.tinystudentmanagement03.model.StudentUpdateModel;
-import com.github.truongbb.tinystudentmanagement03.statics.Region;
+import com.github.truongbb.tinystudentmanagement04.entity.Student;
+import com.github.truongbb.tinystudentmanagement04.exceptionhandling.exception.ObjectNotFoundException;
+import com.github.truongbb.tinystudentmanagement04.model.StudentCreateModel;
+import com.github.truongbb.tinystudentmanagement04.model.StudentUpdateModel;
+import com.github.truongbb.tinystudentmanagement04.statics.Region;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -1,4 +1,4 @@
-package com.github.truongbb.tinystudentmanagement03.dto;
+package com.github.truongbb.tinystudentmanagement04.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

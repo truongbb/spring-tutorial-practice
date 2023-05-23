@@ -1,4 +1,4 @@
-package com.github.truongbb.tinystudentmanagement03.statics;
+package com.github.truongbb.tinystudentmanagement04.statics;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

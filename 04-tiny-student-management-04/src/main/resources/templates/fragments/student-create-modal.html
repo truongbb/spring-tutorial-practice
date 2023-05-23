@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="student-create-modal" class="modal fade" id="student-create-modal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Create a new student</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <form action="#" th:action="@{/students}" th:object="${sinhVienMuonTaoMoi}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" th:field="*{name}" class="form-control" id="name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" th:field="*{address}" class="form-control" id="address"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" th:field="*{phone}" class="form-control" id="phone"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="text" th:field="*{email}" class="form-control" id="email"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gpa">GPA</label>
+                        <input type="number" th:field="*{gpa}" class="form-control" id="gpa"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dob">Date of birth</label>
+                        <input type="date" th:field="*{dob}" class="form-control"
+                               id="dob"/>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="region">Region</label>
+                        <select name="region" id="region" th:field="*{region}" class="form-control">
+                            <option th:each="vungMien : ${T(com.github.truongbb.tinystudentmanagement04.statics.Region).values()}"
+                                    th:value="${vungMien}" th:text="${vungMien.name}"></option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
