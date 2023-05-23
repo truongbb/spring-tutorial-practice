@@ -1,0 +1,9 @@
+.footer {
+    height: 50px;
+    bottom: 0;
+}
+
+.error {
+    color: #dc3545;
+    padding: 0.5rem 0;
+}
