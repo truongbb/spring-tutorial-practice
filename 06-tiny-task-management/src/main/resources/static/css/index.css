@@ -1,0 +1,9 @@
+.error {
+    color: #dc3545;
+    padding-top: 5px;
+}
+
+.card-overdue {
+    background-color: #ffb1b9;
+}
+
