@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,8 +32,24 @@ public class TaskService {
     public List<TaskResponse> getAll() {
         List<Task> tasks = taskRepository.getAll();
         List<TaskDetailResponse> tempData = tasks.stream().map(t -> objectMapper.convertValue(t, TaskDetailResponse.class)).collect(Collectors.toList());
-
         List<TaskStatus> taskStatuses = Arrays.asList(TaskStatus.values());
+
+//        List<TaskResponse> result = new ArrayList<>();
+//        for (int i = 0; i < taskStatuses.size(); i++) {
+//            TaskStatus taskStatus = taskStatuses.get(i);
+//            List<TaskDetailResponse> list = new ArrayList<>();
+//
+//            for (int j = 0; j < tempData.size(); j++) {
+//                if(tempData.get(j).getStatus().equals(taskStatus)) {
+//                    list.add(tempData.get(j));
+//                }
+//            }
+//            TaskResponse taskResponse = new TaskResponse(taskStatus, list);
+//            result.add(taskResponse);
+//        }
+//        return result;
+
+
         return taskStatuses.stream().map(status -> {
             List<TaskDetailResponse> taskDetailResponses = tempData.stream().filter(t -> t.getStatus().equals(status)).collect(Collectors.toList());
             return new TaskResponse(status, taskDetailResponses);
