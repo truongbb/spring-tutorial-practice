@@ -1,0 +1,5 @@
+application:
+  firebase:
+    bucket-name: file-uploading-b5640.appspot.com
+    download-url: https://firebasestorage.googleapis.com/v0/b/file-uploading-b5640.appspot.com/o/%s?alt=media
+    config-json: /Users/buibatruong/Desktop/file-uploading-b5640-firebase-adminsdk-12hrd-703493282b.json
