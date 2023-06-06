@@ -2,6 +2,7 @@ package com.github.truongbb.tinystudentmanagement05.controller;
 
 import com.github.truongbb.tinystudentmanagement05.entity.Student;
 import com.github.truongbb.tinystudentmanagement05.model.request.StudentCreateRequest;
+import com.github.truongbb.tinystudentmanagement05.model.request.StudentSearchRequest;
 import com.github.truongbb.tinystudentmanagement05.model.request.StudentUpdateRequest;
 import com.github.truongbb.tinystudentmanagement05.model.response.RegionResponse;
 import com.github.truongbb.tinystudentmanagement05.service.RegionService;
@@ -79,10 +80,17 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findByIdVer2(id));
     }
 
-    @PutMapping("/api/students/{id}")
+    @PutMapping("/api/v1/students/{id}")
     public ResponseEntity<?> updateStudent(@PathVariable Integer id, @RequestBody @Valid StudentUpdateRequest studentUpdateRequest) {
         studentUpdateRequest.setId(id);
         studentService.updateStudent(studentUpdateRequest);
+        return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/api/v1/students")
+    public ResponseEntity<?> search(StudentSearchRequest request) {
+//        studentUpdateRequest.setId(id);
+//        studentService.updateStudent(studentUpdateRequest);
         return ResponseEntity.ok(null);
     }
 
