@@ -23,11 +23,15 @@
                             </a>
                         </div>
                     </div>
-                    <div class="items border border-light">
-                        <div class="card draggable shadow-sm mb-2" draggable="true"
-                             th:each="taskDetail: ${task.taskDetails}">
-                            <div th:class="'card-body p-2' + ${taskDetail.overdue!=null && taskDetail.overdue ? ' card-overdue ' : ''}"
-                            >
+                    <div class="items border border-light pb-3"
+                         th:attr="task-status=${task.status.code}"
+                         ondrop="dropHandler(event)" ondragover="allowDrop(event)"
+                    >
+                        <div class="card draggable shadow-sm mb-2 task-list droppable"
+                             th:each="taskDetail: ${task.taskDetails}"
+                             draggable="true" ondragstart="dragStart(event)" th:id="'task-' + ${taskDetail.id}"
+                        >
+                            <div th:class="'card-body p-2' + ${taskDetail.overdue!=null && taskDetail.overdue ? ' card-overdue ' : ''}">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <a role="button" class="lead font-weight-bold task-title"
                                        th:text="${taskDetail.name}" th:attr="task-id=${taskDetail.id}"></a>

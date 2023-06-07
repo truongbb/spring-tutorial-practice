@@ -86,4 +86,13 @@ public class TaskService {
     public void delete(Integer id) {
         taskRepository.delete(id);
     }
+
+    public void updateStatus(Integer id, String statusId) {
+        Task task = taskRepository.getOne(id);
+        if (ObjectUtils.isEmpty(task)) {
+            return;
+        }
+        task.setStatus(TaskStatus.valueOf(statusId));
+        taskRepository.update(task);
+    }
 }

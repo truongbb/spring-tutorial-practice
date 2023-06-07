@@ -2,6 +2,7 @@ package com.github.truongbb.tinytaskmanagement.scheduler;
 
 import com.github.truongbb.tinytaskmanagement.entity.Task;
 import com.github.truongbb.tinytaskmanagement.repository.TaskRepository;
+import com.github.truongbb.tinytaskmanagement.statics.TaskStatus;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -28,7 +29,7 @@ public class TaskOverdueMarker {
         }
 
         val now = LocalDateTime.now();
-        tasks.forEach(t -> t.setOverdue(t.getExpectedEndTime().isBefore(now)));
+        tasks.forEach(t -> t.setOverdue(t.getExpectedEndTime().isBefore(now) && !t.getStatus().equals(TaskStatus.COMPLETED)));
     }
 
 }

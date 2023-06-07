@@ -184,3 +184,31 @@ $(document).ready(function () {
     });
 
 });
+
+function dragStart(event) {
+    event.dataTransfer.setData("text", event.target.id);
+}
+
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function dropHandler(event) {
+    event.preventDefault();
+    const id = event.dataTransfer.getData("text");
+    const taskId = id.split("-")[1];
+    const targetStatus = event.target.getAttribute("task-status");
+    $.ajax({
+        url: "/api/v1/tasks/" + taskId + "/" + targetStatus,
+        type: "PUT",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+            event.target.appendChild(document.getElementById(id));
+            toastr.success("Change status successfully");
+        },
+        error: function (data) {
+            toastr.warning(data.responseJSON.error);
+        }
+    });
+
+}
