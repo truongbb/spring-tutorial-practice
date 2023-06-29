@@ -13,7 +13,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long
     Optional<RefreshToken> findByUserAndRefreshTokenAndInvalidated(User user, String refreshToken, boolean invalidated);
 
     @Modifying
-    @Query("update RefreshToken r set r.invalidated = true where r.user = :user")
-    void logOut(User user);
+    @Query("update RefreshToken r set r.invalidated = true where r.user.id = :userId")
+    void logOut(Long userId);
 
 }

@@ -16,7 +16,6 @@ import com.github.truongbb.jwtrefreshtoken.security.JwtUtils;
 import com.github.truongbb.jwtrefreshtoken.security.SecurityUtils;
 import com.github.truongbb.jwtrefreshtoken.statics.Roles;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -24,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
@@ -89,7 +89,7 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String newToken = userRepository.findById(userDetails.getId())
-                .map(user -> refreshTokenRepository.findByUserAndRefreshTokenAndInvalidated(user, request.getRefreshToken(), false)
+                .flatMap(user -> refreshTokenRepository.findByUserAndRefreshTokenAndInvalidated(user, request.getRefreshToken(), false)
                         .map(refreshToken -> {
                             LocalDateTime createdDateTime = refreshToken.getCreatedDateTime();
                             LocalDateTime expiryTime = createdDateTime.plusSeconds(refreshTokenValidityMilliseconds / 1000);
@@ -99,8 +99,7 @@ public class UserService {
                                 return null;
                             }
                             return jwtUtils.generateJwtToken(authentication);
-                        }).orElse(null)
-                )
+                        }))
                 .orElseThrow(() -> new UsernameNotFoundException("Tài khoản không tồn tại"));
 
 
@@ -112,14 +111,13 @@ public class UserService {
                 .build();
     }
 
+    @Transactional
     public void logout() {
-        Optional<String> usernameOptional = SecurityUtils.getCurrentUserLogin();
-        if (usernameOptional.isEmpty()) {
+        Optional<Long> userIdOptional = SecurityUtils.getCurrentUserLoginId();
+        if (userIdOptional.isEmpty()) {
             throw new UsernameNotFoundException("Tài khoản không tồn tại");
         }
-        String username = usernameOptional.get();
-        User user = userRepository.findByUsername(username).get();
-        refreshTokenRepository.logOut(user);
+        refreshTokenRepository.logOut(userIdOptional.get());
         SecurityContextHolder.clearContext();
     }
 }

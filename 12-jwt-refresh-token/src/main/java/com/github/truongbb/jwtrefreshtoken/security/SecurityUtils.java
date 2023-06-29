@@ -37,6 +37,22 @@ public final class SecurityUtils {
     }
 
     /**
+     * Get the login of the current user.
+     *
+     * @return the login of the current user.
+     */
+    public static Optional<Long> getCurrentUserLoginId() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        return Optional.ofNullable(securityContext.getAuthentication()).map(authentication -> {
+            if (authentication.getPrincipal() instanceof UserDetails) {
+                CustomUserDetails springSecurityUser = (CustomUserDetails) authentication.getPrincipal();
+                return springSecurityUser.getId();
+            }
+            return null;
+        });
+    }
+
+    /**
      * Get the JWT of the current user.
      *
      * @return the JWT of the current user.

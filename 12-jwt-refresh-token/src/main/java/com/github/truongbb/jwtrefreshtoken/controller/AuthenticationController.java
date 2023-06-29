@@ -21,6 +21,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -84,8 +85,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh-token")
-    public JwtResponse refreshToken(@RequestBody @Valid RefreshTokenRequest request) throws RefreshTokenNotFoundException {
-        return userService.refreshToken(request);
+    public ResponseEntity<?> refreshToken(@RequestBody @Valid RefreshTokenRequest request) {
+        try {
+            return ResponseEntity.ok(userService.refreshToken(request));
+        } catch (RefreshTokenNotFoundException | UsernameNotFoundException ex) {
+            return new ResponseEntity<>("Thông tin refreshToken không chính xác", HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/logout")
