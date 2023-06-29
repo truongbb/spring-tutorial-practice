@@ -13,11 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Table(name = "roles")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Role {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+public class Role extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     Roles name;

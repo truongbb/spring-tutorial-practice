@@ -18,8 +18,7 @@ public class JpaAuditingConfig implements AuditorAware<String> {
         } else {
             try {
                 Authentication userAuthentication = SecurityContextHolder.getContext().getAuthentication();
-                CustomUserDetails userDetails = (CustomUserDetails) userAuthentication.getDetails();
-
+                CustomUserDetails userDetails = (CustomUserDetails) userAuthentication.getPrincipal();
                 return Optional.of(userDetails.getUsername());
             } catch (Exception e) {
                 return Optional.empty();

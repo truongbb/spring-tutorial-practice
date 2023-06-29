@@ -3,7 +3,9 @@ package com.github.truongbb.jwtrefreshtoken.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.truongbb.jwtrefreshtoken.entity.Role;
 import com.github.truongbb.jwtrefreshtoken.entity.User;
+import com.github.truongbb.jwtrefreshtoken.exception.ExistedUserException;
 import com.github.truongbb.jwtrefreshtoken.exception.RefreshTokenNotFoundException;
+import com.github.truongbb.jwtrefreshtoken.model.request.CreateUserRequest;
 import com.github.truongbb.jwtrefreshtoken.model.request.RefreshTokenRequest;
 import com.github.truongbb.jwtrefreshtoken.model.request.RegistrationRequest;
 import com.github.truongbb.jwtrefreshtoken.model.response.JwtResponse;
@@ -119,5 +121,21 @@ public class UserService {
         }
         refreshTokenRepository.logOut(userIdOptional.get());
         SecurityContextHolder.clearContext();
+    }
+
+    public void createUser(CreateUserRequest request) throws ExistedUserException {
+        Optional<User> userOptional = userRepository.findByUsername(request.getUsername());
+        if (!userOptional.isEmpty()) {
+            throw new ExistedUserException();
+        }
+
+        Set<Role> roles = roleRepository.findByName(Roles.USER).stream().collect(Collectors.toSet());
+
+        User user = User.builder()
+                .username(request.getUsername())
+                .password(passwordEncoder.encode("123"))
+                .roles(roles)
+                .build();
+        userRepository.save(user);
     }
 }

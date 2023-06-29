@@ -21,7 +21,7 @@ public class User extends BaseEntity {
 
     String password;
 
-    Boolean activated;
+    boolean activated;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
