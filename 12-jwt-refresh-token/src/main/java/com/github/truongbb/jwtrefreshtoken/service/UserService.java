@@ -8,11 +8,15 @@ import com.github.truongbb.jwtrefreshtoken.exception.RefreshTokenNotFoundExcepti
 import com.github.truongbb.jwtrefreshtoken.model.request.CreateUserRequest;
 import com.github.truongbb.jwtrefreshtoken.model.request.RefreshTokenRequest;
 import com.github.truongbb.jwtrefreshtoken.model.request.RegistrationRequest;
+import com.github.truongbb.jwtrefreshtoken.model.request.UserSearchRequest;
+import com.github.truongbb.jwtrefreshtoken.model.response.CommonResponse;
 import com.github.truongbb.jwtrefreshtoken.model.response.JwtResponse;
 import com.github.truongbb.jwtrefreshtoken.model.response.UserResponse;
+import com.github.truongbb.jwtrefreshtoken.model.response.UserSearchResponse;
 import com.github.truongbb.jwtrefreshtoken.repository.RefreshTokenRepository;
 import com.github.truongbb.jwtrefreshtoken.repository.RoleRepository;
 import com.github.truongbb.jwtrefreshtoken.repository.UserRepository;
+import com.github.truongbb.jwtrefreshtoken.repository.custom.UserCustomRepository;
 import com.github.truongbb.jwtrefreshtoken.security.CustomUserDetails;
 import com.github.truongbb.jwtrefreshtoken.security.JwtUtils;
 import com.github.truongbb.jwtrefreshtoken.security.SecurityUtils;
@@ -46,6 +50,8 @@ public class UserService {
 
     final RefreshTokenRepository refreshTokenRepository;
 
+    final UserCustomRepository userCustomRepository;
+
     @Value("${application.security.refreshToken.tokenValidityMilliseconds}")
     long refreshTokenValidityMilliseconds;
 
@@ -53,12 +59,13 @@ public class UserService {
 
     public UserService(PasswordEncoder passwordEncoder, UserRepository userRepository,
                        RoleRepository roleRepository, ObjectMapper objectMapper,
-                       RefreshTokenRepository refreshTokenRepository, JwtUtils jwtUtils) {
+                       RefreshTokenRepository refreshTokenRepository, UserCustomRepository userCustomRepository, JwtUtils jwtUtils) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.objectMapper = objectMapper;
         this.refreshTokenRepository = refreshTokenRepository;
+        this.userCustomRepository = userCustomRepository;
         this.jwtUtils = jwtUtils;
     }
 
@@ -138,4 +145,20 @@ public class UserService {
                 .build();
         userRepository.save(user);
     }
+
+    public CommonResponse<?> searchUser(UserSearchRequest request) {
+        List<UserSearchResponse> users = userCustomRepository.searchUser(request);
+
+        Integer pageIndex = request.getPageIndex();
+        Integer pageSize = request.getPageSize();
+        double pageNumber = Math.ceil((float) users.size() / pageSize);
+
+        users = users.subList((pageIndex - 1) * pageSize + 1, pageIndex * pageSize + 1);
+
+        return CommonResponse.builder()
+                .pageNumber((int) pageNumber)
+                .data(users)
+                .build();
+    }
+
 }
