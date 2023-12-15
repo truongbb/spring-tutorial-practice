@@ -3,7 +3,7 @@ $(document).ready(function () {
     let chosenFile = null;
     let currentImage = null;
 
-    const defaultImg = "/images/default_image.jpeg";
+    const defaultImg = "/images/default.png";
 
     $("#product-img-show").click(() => {
         $("#product-image").click();

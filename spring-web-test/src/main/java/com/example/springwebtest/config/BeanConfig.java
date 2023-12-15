@@ -1,4 +1,4 @@
-package com.example.springwebtest;
+package com.example.springwebtest.config;
 
 import com.google.gson.*;
 import org.springframework.context.annotation.Bean;
