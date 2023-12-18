@@ -31,8 +31,8 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<?> comment(@RequestPart("productRequest") String productCreationRequest,
-                                     @RequestPart("image") MultipartFile image) {
+    public ResponseEntity<?> creatProduct(@RequestPart("productRequest") String productCreationRequest,
+                                          @RequestPart("image") MultipartFile image) {
         ProductCreationRequest request = gson.fromJson(productCreationRequest, ProductCreationRequest.class);
         productService.createProduct(request, image);
         return ResponseEntity.ok(null);

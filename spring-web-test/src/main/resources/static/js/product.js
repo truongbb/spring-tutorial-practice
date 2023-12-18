@@ -24,7 +24,6 @@ $(document).ready(function () {
         const imageBlob = new Blob([chosenFile], {type: chosenFile.type});
         const imageUrl = URL.createObjectURL(imageBlob);
         $("#product-img-show").attr("src", imageUrl);
-
     });
 
     $("#save-product-btn").click(function () {

@@ -15,6 +15,6 @@ public class Product {
     private String name;
     private Float price;
     private String description;
-    private String image;
+    private String image;// lưu tên ảnh (pet_food.png)
 
 }
