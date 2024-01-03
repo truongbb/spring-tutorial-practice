@@ -1,5 +1,6 @@
 package com.github.truongbb.jwtrefreshtoken.entity;
 
+import com.github.truongbb.jwtrefreshtoken.statics.UserStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -22,6 +23,9 @@ public class User extends BaseEntity {
     String password;
 
     boolean activated;
+
+    @Enumerated(EnumType.STRING)
+    UserStatus status;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",

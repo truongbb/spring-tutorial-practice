@@ -153,7 +153,7 @@ public class UserService {
         Integer pageSize = request.getPageSize();
         double pageNumber = Math.ceil((float) users.size() / pageSize);
 
-        users = users.subList((pageIndex - 1) * pageSize + 1, pageIndex * pageSize + 1);
+//        users = users.subList((pageIndex - 1) * pageSize + 1, pageIndex * pageSize + 1);
 
         return CommonResponse.builder()
                 .pageNumber((int) pageNumber)

@@ -14,7 +14,7 @@ import java.util.Map;
 public class UserCustomRepository extends BaseRepository {
 
     public List<UserSearchResponse> searchUser(UserSearchRequest request) {
-        String sql = "select u.username name, u.gender gender from users u where 1 = 1";
+        String sql = "select u.username name from users u where 1 = 1";
 
         Map<String, Object> parameters = new HashMap<>();
 
