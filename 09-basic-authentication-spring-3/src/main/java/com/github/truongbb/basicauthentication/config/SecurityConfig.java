@@ -41,6 +41,7 @@ public class SecurityConfig {
 
                         .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 Console
                         .anyRequest().authenticated()
+//                        .anyRequest().permitAll()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
