@@ -35,12 +35,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET, "/api/v1/users", "/api/v1/users/{id}")
                         .hasAnyAuthority(Roles.USER.toString(), Roles.ADMIN.toString())
+
                         .requestMatchers(HttpMethod.POST, "/api/v1/users")
                         .hasAnyAuthority(Roles.ADMIN.toString())
+
                         .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 Console
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**") // Disable CSRF for H2 Console
                 )
