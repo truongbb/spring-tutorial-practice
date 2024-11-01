@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{common/head :: html_head(pageTitle='Danh sách sinh viên')}">
+<body>
+
+<div class="container mt-5">
+
+    <div class="row text-center mb-4">
+        <div class="col">
+            <h1>DANH SÁCH SINH VIÊN</h1>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col">
+            <form id="search-student-form">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="gpaStart" class="form-label">GPA start:</label>
+                            <input type="number" class="form-control" id="gpaStart" placeholder="Enter gpaStart"
+                                   name="gpaStart">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="gpaEnd" class="form-label">GPA end:</label>
+                            <input type="number" class="form-control" id="gpaEnd" placeholder="Enter gpaEnd"
+                                   name="gpaEnd">
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-primary me-4" id="search-student">Search</button>
+                <button type="button" class="btn btn-secondary" id="reset-search-student">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table
+                    id="student-table"
+                    class="table table-hover table-stripped table-bordered"
+            >
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tên sinh viên</th>
+                    <th>Email</th>
+                    <th>SDT</th>
+                    <th>Giới tính</th>
+                    <th>DOB</th>
+                    <th>Điểm trung bình</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mt-4" id="student-paging">
+        <div class="col total-record">
+        </div>
+        <div class="col">
+            <ul class="pagination justify-content-end" style="margin:20px 0">
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
+
+<script src="/js/students/students.js"></script>

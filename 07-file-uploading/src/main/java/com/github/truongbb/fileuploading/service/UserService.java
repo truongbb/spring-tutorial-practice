@@ -13,7 +13,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class UserService {
 
-    private static final String LOCAL_FOLDER = "/Users/buibatruong/Desktop";
+    private static final String LOCAL_FOLDER = "/Users/buibatruong/Documents/Projects";
 
     public String uploadLocalFile(MultipartFile file) throws IOException {
         if (ObjectUtils.isEmpty(file) || file.isEmpty()) {
