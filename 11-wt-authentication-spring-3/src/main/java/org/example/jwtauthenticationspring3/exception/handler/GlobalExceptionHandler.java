@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(ObjectNotFoundException.class)
-    public ResponseEntity<?> handleValidationExceptions(ObjectNotFoundException ex) {
+    public ResponseEntity<ErrorResponseModel> handleValidationExceptions(ObjectNotFoundException ex) {
         ErrorResponseModel errorResponseModel = ErrorResponseModel.builder()
                 .code(String.valueOf(HttpStatus.NOT_FOUND.value()))
                 .message(ex.getMessage())
