@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+application:
+  security:
+    jwt:
+      secretKey: de6aaeabadeccc598160172044da9c566242ae3bde6aaeabadeccc598160172044da9c566242ae3b
+      tokenValidityMilliseconds: 86400000
+#      rememberMeTokenValiditySeconds: 25920000000
