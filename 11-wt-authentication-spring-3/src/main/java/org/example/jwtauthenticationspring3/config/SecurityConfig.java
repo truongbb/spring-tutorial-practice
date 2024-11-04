@@ -86,7 +86,7 @@ public class SecurityConfig {
                                 .hasAnyAuthority(Roles.ADMIN.toString())
 
                                 .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 Console
-                                .requestMatchers("/api/v1/authentication/**").permitAll() // Allow access to log-in, register
+                                .requestMatchers("/api/v1/authentications/**").permitAll() // Allow access to log-in, register
 //                              .anyRequest().authenticated()
                                 .anyRequest().permitAll()
                 )

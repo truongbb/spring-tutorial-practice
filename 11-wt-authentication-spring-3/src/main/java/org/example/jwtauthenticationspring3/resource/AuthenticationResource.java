@@ -76,5 +76,4 @@ public class AuthenticationResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 
-
 }
