@@ -30,7 +30,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         Optional<Role> roleUserOptional = roleRepository.findByName(Roles.USER);
         if (roleUserOptional.isEmpty()) {
