@@ -122,7 +122,8 @@ public class AuthenticationService {
     public JwtResponse refreshToken(RefreshTokenRequest request) throws InvalidRefreshTokenException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        JwtResponse response = userRepository.findById(userDetails.getId()).flatMap(user -> refreshTokenRepository.findByUserAndRefreshTokenAndInvalidated(user, request.getRefreshToken(), false)
+        JwtResponse response = userRepository.findById(userDetails.getId())
+                .flatMap(user -> refreshTokenRepository.findByUserAndRefreshTokenAndInvalidated(user, request.getRefreshToken(), false)
                         .map(oldRefreshToken -> {
                             LocalDateTime createdDateTime = oldRefreshToken.getCreatedAt();
                             LocalDateTime expiryTime = createdDateTime.plusSeconds(refreshTokenValidityMilliseconds / 1000);
@@ -160,11 +161,9 @@ public class AuthenticationService {
 
     @Transactional
     public void logout() {
-        Optional<Long> userIdOptional = SecurityUtils.getCurrentUserLoginId();
-        if (userIdOptional.isEmpty()) {
-            throw new UsernameNotFoundException("Tài khoản không tồn tại");
-        }
-        refreshTokenRepository.logOut(userIdOptional.get());
+        Long userId = SecurityUtils.getCurrentUserLoginId()
+                .orElseThrow(() -> new UsernameNotFoundException("Tài khoản không tồn tại"));
+        refreshTokenRepository.logOut(userId);
         SecurityContextHolder.clearContext();
     }
 

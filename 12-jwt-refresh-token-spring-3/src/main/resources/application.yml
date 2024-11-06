@@ -21,9 +21,9 @@ application:
   security:
     jwt:
       secretKey: de6aaeabadeccc598160172044da9c566242ae3bde6aaeabadeccc598160172044da9c566242ae3b
-      tokenValidityMilliseconds: 86400000
+      tokenValidityMilliseconds: 900000
 #      rememberMeTokenValiditySeconds: 25920000000
     refreshToken:
       secretKey: e3f0acd51fe8f38b145c82074ac46abf3395db7ad3eb1a96166d31c35409b14fe7725d18bd177d860caaceb17decdc5a704c0ecc91a8e40ac4b5168e9a0af10e
-      tokenValidityMilliseconds: 259200000
+      tokenValidityMilliseconds: 1800000
 

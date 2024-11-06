@@ -1,8 +1,8 @@
 package com.github.truongbb.jwtrefreshtoken.exception.handler;
 
 import com.github.truongbb.jwtrefreshtoken.exception.ExistedUserException;
-import com.github.truongbb.jwtrefreshtoken.exception.ObjectNotFoundException;
 import com.github.truongbb.jwtrefreshtoken.exception.InvalidRefreshTokenException;
+import com.github.truongbb.jwtrefreshtoken.exception.ObjectNotFoundException;
 import com.github.truongbb.jwtrefreshtoken.model.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({ExistedUserException.class, InvalidRefreshTokenException.class, ObjectNotFoundException.class})
+    @ExceptionHandler({
+            ExistedUserException.class,
+            InvalidRefreshTokenException.class,
+            ObjectNotFoundException.class
+    })
     public ResponseEntity<ErrorResponse> handleValidationExceptions(Exception ex) {
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(ex.getMessage())
