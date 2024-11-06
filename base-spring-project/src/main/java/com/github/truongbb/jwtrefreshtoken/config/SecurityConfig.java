@@ -14,11 +14,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.web.AbstractRequestMatcherRegistry;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -81,28 +79,40 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 Console
+                        .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 Console
 
-                                // user start
-                                .requestMatchers(HttpMethod.GET, "/api/v1/users", "/api/v1/users/{id}").hasAnyAuthority(Roles.USER.toString(), Roles.ADMIN.toString())
-                                .requestMatchers(HttpMethod.POST, "/api/v1/users").hasAnyAuthority(Roles.ADMIN.toString())
-                                .requestMatchers(HttpMethod.PATCH, "/api/v1/users/{id}/password").authenticated()
-                                // user end
+                        // user start
+                        .requestMatchers(HttpMethod.GET, "/api/v1/users", "/api/v1/users/{id}").hasAnyAuthority(Roles.USER.toString(), Roles.ADMIN.toString())
+                        .requestMatchers(HttpMethod.POST, "/api/v1/users").hasAnyAuthority(Roles.ADMIN.toString())
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/users/{id}/password").authenticated()
+                        // user end
 
-                                // authentication start
-                                .requestMatchers("/api/v1/authentications/refresh_token", "/api/v1/authentications/logout").authenticated()
-                                .requestMatchers(
-                                        "/api/v1/authentications/login",
-                                        "/api/v1/authentications/registration",
-                                        "/api/v1/authentications/{id}/activations",
-                                        "/api/v1/authentications/{id}/activation_mail_sending",
-                                        "/api/v1/authentications/password_forgotten_emails",
-                                        "/api/v1/authentications/{id}/password_forgotten"
-                                ).permitAll() // Allow access to log-in, register
-                                // authentication end
+                        // authentication start
+                        .requestMatchers(
+                                "/api/v1/authentications/refresh_token",
+                                "/api/v1/authentications/logout"
+                        ).authenticated()
+                        .requestMatchers(
+                                "/api/v1/authentications/login",
+                                "/api/v1/authentications/registration",
+                                "/api/v1/authentications/{id}/activations",
+                                "/api/v1/authentications/{id}/activation_mail_sending",
+                                "/api/v1/authentications/password_forgotten_emails",
+                                "/api/v1/authentications/{id}/password_forgotten"
+                        ).permitAll() // Allow access to log-in, register
+                        // authentication end
 
-//                              .anyRequest().authenticated()
-                                .anyRequest().permitAll()
+                        // account start
+                        .requestMatchers(
+                                "/api/v1/accounts/{id}/activations",
+                                "/api/v1/accounts/{id}/activation_emails",
+                                "/api/v1/accounts/password_forgotten_emails",
+                                "/api/v1/accounts/{id}/password_forgotten"
+                        ).permitAll()
+                        // account end
+
+                        .requestMatchers("/api/**").authenticated() // all other apis need authentication
+                        .anyRequest().permitAll() // all thymeleaf, html page don't have to authenticate
                 )
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint(unauthorizedHandler)

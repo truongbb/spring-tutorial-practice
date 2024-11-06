@@ -1,7 +1,11 @@
 package com.github.truongbb.jwtrefreshtoken.resource;
 
-import com.github.truongbb.jwtrefreshtoken.exception.*;
-import com.github.truongbb.jwtrefreshtoken.model.request.*;
+import com.github.truongbb.jwtrefreshtoken.exception.ExistedUserException;
+import com.github.truongbb.jwtrefreshtoken.exception.InvalidRefreshTokenException;
+import com.github.truongbb.jwtrefreshtoken.exception.ObjectNotFoundException;
+import com.github.truongbb.jwtrefreshtoken.model.request.LoginRequest;
+import com.github.truongbb.jwtrefreshtoken.model.request.RefreshTokenRequest;
+import com.github.truongbb.jwtrefreshtoken.model.request.RegistrationRequest;
 import com.github.truongbb.jwtrefreshtoken.model.response.JwtResponse;
 import com.github.truongbb.jwtrefreshtoken.model.response.UserResponse;
 import com.github.truongbb.jwtrefreshtoken.service.AuthenticationService;
@@ -45,29 +49,4 @@ public class AuthenticationResource {
         authenticateService.logout();
     }
 
-    @PostMapping("/{id}/activations")
-    public ResponseEntity<?> activateAccount(@PathVariable Long id)
-            throws ObjectNotFoundException, InvalidEmailActivationUrlException {
-        authenticateService.activateAccount(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-    @PostMapping("/{id}/activation_mail_sending")
-    public ResponseEntity<?> sendActivationEmail(@PathVariable Long id)
-            throws MessagingException {
-        authenticateService.sendActivationEmail(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-    @PostMapping("/password_forgotten_emails")
-    public ResponseEntity<?> sendForgotPasswordEmail(@RequestBody @Valid ForgotPasswordEmailRequest request) throws MessagingException {
-        authenticateService.sendForgotPasswordEmail(request);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
-    @PatchMapping("/{id}/password_forgotten")
-    public ResponseEntity<?> changeForgotPassword(@PathVariable Long id, @RequestBody @Valid PasswordChangingRequest request) throws MessagingException, ObjectNotFoundException, InvalidEmailActivationUrlException, PasswordNotMatchedException {
-        authenticateService.changeForgotPassword(id, request);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
 }
