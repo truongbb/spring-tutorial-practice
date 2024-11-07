@@ -5,6 +5,6 @@ public enum UserStatus {
     CREATED,
     ACTIVATED,
     DEACTIVATED,
-    BANNED
+    LOCKED // or BANNED
 
 }

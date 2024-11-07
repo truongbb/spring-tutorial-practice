@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 public class CreateUserRequest {
 
     @NotBlank
-    @Length(max = 50, message = "username không được vượt quá 50 ký tự")
+    @Length(max = 50, message = "username must be less than 50 characters")
     String username;
 
 }

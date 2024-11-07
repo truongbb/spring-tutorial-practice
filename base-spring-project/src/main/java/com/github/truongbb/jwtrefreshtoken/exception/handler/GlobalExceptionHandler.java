@@ -14,7 +14,8 @@ public class GlobalExceptionHandler {
             ExistedUserException.class,
             InvalidRefreshTokenException.class,
             ObjectNotFoundException.class,
-            InvalidEmailActivationUrlException.class
+            ExpiredEmailActivationUrlException.class,
+            ExpiredPasswordForgottenUrlException.class
     })
     public ResponseEntity<ErrorResponse> handleValidationExceptions(Exception ex) {
         ErrorResponse errorResponse = ErrorResponse.builder()
@@ -27,7 +28,7 @@ public class GlobalExceptionHandler {
         } else if (ex instanceof InvalidRefreshTokenException || ex instanceof ObjectNotFoundException) {
             errorResponse.setCode(String.valueOf(HttpStatus.NOT_FOUND.value()));
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
-        } else if (ex instanceof InvalidEmailActivationUrlException) {
+        } else if (ex instanceof ExpiredEmailActivationUrlException || ex instanceof ExpiredPasswordForgottenUrlException) {
             errorResponse.setCode(String.valueOf(HttpStatus.UNPROCESSABLE_ENTITY.value()));
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(errorResponse);
         }

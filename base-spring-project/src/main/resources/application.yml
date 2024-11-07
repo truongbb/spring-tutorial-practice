@@ -40,11 +40,11 @@ application:
 
   account:
     activation:
-      activationUrl: http://localhost:8080/api/authentications/{id}/activations
+      activationUrl: http://localhost:8080/api/v1/accounts/{id}/activations
       expiredDurationInMilliseconds: 1800000
       maxResendTimes: 3
     passwordForgotten:
-      url: http://localhost:8080/api/authentications/{id}/password_forgotten
+      url: http://localhost:8080/api/v1/accounts/{id}/password_forgotten
       expiredDurationInMilliseconds: 1800000
 #      maxResendTimes: 3
 

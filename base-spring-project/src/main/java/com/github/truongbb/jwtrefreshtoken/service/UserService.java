@@ -6,9 +6,7 @@ import com.github.truongbb.jwtrefreshtoken.entity.Role;
 import com.github.truongbb.jwtrefreshtoken.entity.User;
 import com.github.truongbb.jwtrefreshtoken.exception.ExistedUserException;
 import com.github.truongbb.jwtrefreshtoken.exception.ObjectNotFoundException;
-import com.github.truongbb.jwtrefreshtoken.exception.PasswordNotMatchedException;
 import com.github.truongbb.jwtrefreshtoken.model.request.CreateUserRequest;
-import com.github.truongbb.jwtrefreshtoken.model.request.PasswordChangingRequest;
 import com.github.truongbb.jwtrefreshtoken.model.request.UserSearchRequest;
 import com.github.truongbb.jwtrefreshtoken.model.response.CommonSearchResponse;
 import com.github.truongbb.jwtrefreshtoken.model.response.UserResponse;
@@ -55,14 +53,14 @@ public class UserService {
     public UserResponse createUser(CreateUserRequest request) throws ExistedUserException {
         Optional<User> userOptional = userRepository.findByUsername(request.getUsername());
         if (userOptional.isPresent()) {
-            throw new ExistedUserException("Username đã tồn tại");
+            throw new ExistedUserException("Username existed");
         }
 
         Set<Role> roles = roleRepository.findByName(Roles.USER).stream().collect(Collectors.toSet());
 
         User user = User.builder()
                 .username(request.getUsername())
-                .password(passwordEncoder.encode("123"))
+                .password(passwordEncoder.encode("123")) // TODO: change to random password
                 .roles(roles)
                 .status(UserStatus.ACTIVATED)
                 .build();
@@ -93,15 +91,4 @@ public class UserService {
                 .build();
     }
 
-    public void changePassword(Long id, PasswordChangingRequest request) throws ObjectNotFoundException, PasswordNotMatchedException {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ObjectNotFoundException("User not found"));
-
-        if (!request.getPassword().equals(request.getConfirmedPassword())) {
-            throw new PasswordNotMatchedException("Password not matched");
-        }
-
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        userRepository.save(user);
-    }
 }

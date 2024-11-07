@@ -84,7 +84,6 @@ public class SecurityConfig {
                         // user start
                         .requestMatchers(HttpMethod.GET, "/api/v1/users", "/api/v1/users/{id}").hasAnyAuthority(Roles.USER.toString(), Roles.ADMIN.toString())
                         .requestMatchers(HttpMethod.POST, "/api/v1/users").hasAnyAuthority(Roles.ADMIN.toString())
-                        .requestMatchers(HttpMethod.PATCH, "/api/v1/users/{id}/password").authenticated()
                         // user end
 
                         // authentication start
@@ -94,15 +93,12 @@ public class SecurityConfig {
                         ).authenticated()
                         .requestMatchers(
                                 "/api/v1/authentications/login",
-                                "/api/v1/authentications/registration",
-                                "/api/v1/authentications/{id}/activations",
-                                "/api/v1/authentications/{id}/activation_mail_sending",
-                                "/api/v1/authentications/password_forgotten_emails",
-                                "/api/v1/authentications/{id}/password_forgotten"
+                                "/api/v1/authentications/registration"
                         ).permitAll() // Allow access to log-in, register
                         // authentication end
 
                         // account start
+                        .requestMatchers(HttpMethod.PATCH, "/api/v1/accounts/{id}/password").authenticated()
                         .requestMatchers(
                                 "/api/v1/accounts/{id}/activations",
                                 "/api/v1/accounts/{id}/activation_emails",

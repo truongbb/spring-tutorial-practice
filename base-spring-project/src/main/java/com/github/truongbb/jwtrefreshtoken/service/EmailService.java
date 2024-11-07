@@ -62,7 +62,7 @@ public class EmailService {
                 "</div>";
 
         mimeMessageHelper.setText(content, true);
-        mimeMessageHelper.setSubject("Registration Confirmation");
+        mimeMessageHelper.setSubject("Password Forgotten");
 
         javaMailSender.send(mimeMessage);
     }

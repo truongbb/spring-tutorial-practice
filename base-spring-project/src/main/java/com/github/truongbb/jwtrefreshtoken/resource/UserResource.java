@@ -41,11 +41,4 @@ public class UserResource {
         return ResponseEntity.status(HttpStatus.CREATED.value()).body(userResponse);
     }
 
-    @PatchMapping("/{id}/password")
-    public ResponseEntity<?> changePassword(@PathVariable Long id, @RequestBody @Valid PasswordChangingRequest request)
-            throws ObjectNotFoundException, PasswordNotMatchedException {
-        userService.changePassword(id, request);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
-
 }

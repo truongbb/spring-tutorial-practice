@@ -70,7 +70,7 @@ public class AuthenticationService {
             throws ObjectNotFoundException, ExistedUserException, MessagingException {
         Optional<User> userOptional = userRepository.findByUsernameAndStatus(registrationRequest.getUsername(), UserStatus.ACTIVATED);
         if (userOptional.isPresent()) {
-            throw new ExistedUserException("Username đã tồn tại");
+            throw new ExistedUserException("Username existed");
         }
         Role role = roleRepository.findByName(Roles.USER)
                 .orElseThrow(() -> new ObjectNotFoundException("Cannot find USER role"));
@@ -159,10 +159,10 @@ public class AuthenticationService {
                                             .collect(Collectors.toSet()))
                                     .build();
                         }))
-                .orElseThrow(() -> new UsernameNotFoundException("Tài khoản không tồn tại"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
         if (response == null) {
-            throw new InvalidRefreshTokenException("Refresh token không hợp lệ hoặc đã hết hạn");
+            throw new InvalidRefreshTokenException("Refresh token invalid or expired");
         }
         return response;
     }
@@ -170,7 +170,7 @@ public class AuthenticationService {
     @Transactional
     public void logout() {
         Long userId = SecurityUtils.getCurrentUserLoginId()
-                .orElseThrow(() -> new UsernameNotFoundException("Tài khoản không tồn tại"));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         refreshTokenRepository.logOut(userId);
         SecurityContextHolder.clearContext();
     }

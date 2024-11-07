@@ -40,7 +40,8 @@ public class AuthenticationResource {
     }
 
     @PostMapping("/refresh_token")
-    public JwtResponse refreshToken(@RequestBody @Valid RefreshTokenRequest request) throws InvalidRefreshTokenException {
+    public JwtResponse refreshToken(@RequestBody @Valid RefreshTokenRequest request)
+            throws InvalidRefreshTokenException {
         return authenticateService.refreshToken(request);
     }
 
