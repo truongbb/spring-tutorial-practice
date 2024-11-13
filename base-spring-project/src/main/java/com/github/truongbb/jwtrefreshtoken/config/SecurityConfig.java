@@ -80,6 +80,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll() // Allow access to H2 Console
+                        .requestMatchers("/swagger-ui/index.html").permitAll() // Allow access to Swagger UI
 
                         // user start
                         .requestMatchers(HttpMethod.GET, "/api/v1/users", "/api/v1/users/{id}").hasAnyAuthority(Roles.USER.toString(), Roles.ADMIN.toString())
