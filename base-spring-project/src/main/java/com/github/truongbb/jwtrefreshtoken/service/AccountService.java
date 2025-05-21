@@ -74,6 +74,7 @@ public class AccountService {
         }
         emailService.sendActivationMail(user);
         user.setActivationMailSentCount(user.getActivationMailSentCount() + 1);
+        user.setActivationMailSentAt(LocalDateTime.now());
         userRepository.save(user);
     }
 
